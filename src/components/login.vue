@@ -1,14 +1,16 @@
 <template>
   <div class="ba">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" autocomplete="on">
-      <div class="padd">
-        <span>用户</span><el-input ref="user" v-model="loginForm.user" type="text" name="user" autocomplete="on" />
-      </div>
-      <label>密码</label><el-input ref="password" v-model="loginForm.password" type="password" name="password" />
-      <el-button class="bt" type="submit" @click="submitForm">提交</el-button>
-      <el-form-item class="lab">
-        <el-label>注册</el-label>
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
+      <el-form-item>
+        <span>用户</span>
+        <el-input ref="user" v-model="loginForm.user" type="text" name="user" autocomplete="on" />
       </el-form-item>
+
+      <el-form-item>
+        <span>密码</span>
+        <el-input ref="password" v-model="loginForm.password" type="password" name="password" />
+      </el-form-item>
+      <el-button class="bt" type="submit" @click="submitForm">提交</el-button>
     </el-form>
   </div>
 </template>
@@ -61,18 +63,38 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
-  .img1 {
-    width: 20%;
-    height: 100%;
-  }
+<style lang="scss" scoped>
+
+  $dark_gray:#889aa4;
+
   .ba{
     height: 100%;
     width: 100%;
+    left: 0;
+    bottom: 0;
     background-image: url("../assets/lc.png") ;
     background-repeat: no-repeat;
-    background-size: auto ;
+    background-size: 100% 100% ;
+    position: absolute;
+
+    .login-form {
+      position: relative;
+      width: 520px;
+      max-width: 100%;
+      padding: 160px 35px 0;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    span {
+      padding: 6px 6px;
+      color: $dark_gray;
+      vertical-align: middle;
+      width: 60px;
+      display: inline-block;
+    }
   }
+
   .lab{
     font-size: 7px;
     color: brown;
