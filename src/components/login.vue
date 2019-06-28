@@ -2,16 +2,16 @@
   <div class="ba">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
       <h3>login</h3>
-      <el-form-item>
+      <el-form-item prop="username">
         <span class="user">用户:</span>
-        <el-input ref="user" v-model="loginForm.user" class="user" type="text" name="user" autocomplete="on" />
+        <el-input ref="username" v-model="loginForm.username" class="user" type="text" name="username" />
       </el-form-item>
 
-      <el-form-item>
+      <el-form-item prop="password">
         <span class="password">密码:</span>
         <el-input ref="password" v-model="loginForm.password" class="password" type="password" name="password" />
       </el-form-item>
-      <el-button class="bt" type="submit" @click="submitForm">提交</el-button>
+      <el-button class="bt" type="submit" @click="submitForm('loginForm')">提交</el-button>
 
       <el-form-item>
         <span class="item1">注册</span>
@@ -26,14 +26,16 @@ export default {
   name: 'Login',
   data() {
     const validatorUsername = (rule, value, callback) => {
-      if (!validatorUsername(value)) {
+      if (value == 0) {
         callback(new Error('用户不能为空'))
+      } else if (value.length < 2) {
+        callback(new Error('用户长度不符合'))
       } else {
         callback()
       }
     }
     const validatorPassword = (rule, value, callback) => {
-      if (validatorPassword.length < 6) {
+      if (value.length < 6) {
         callback(new Error('密码长度不符合'))
       } else {
         callback()
@@ -41,25 +43,29 @@ export default {
     }
     return {
       loginForm: {
-        user: '',
-        password: ''
+        username: 'admin',
+        password: '111111'
 
       },
       loginRules: {
-        user: [{ required: true, trigger: 'blur', validator: validatorUsername }],
-        password: [{ required: true, tigger: 'blur', validator: validatorPassword }]
+        username: [{ required: true, trigger: 'blur', validator: validatorUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatorPassword }]
       }
     }
   },
   methods: {
-    submitForm() {
-      const name = this.$refs.user.value
-      const pass = this.$refs.password.value
-      if (name === 'admin' && pass === '12345') {
-        this.$router.push({
-          path: '/index'
-        })
-      }
+    submitForm(loginForm) {
+      // const name = this.$refs.username.value
+      // const pass = this.$refs.password.value
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          alert('登录成功')
+          this.$router.push('/index')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
 
   }
