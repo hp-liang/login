@@ -1,7 +1,7 @@
 <template>
   <div class="ba">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
-      <h3>login</h3>
+      <h3>登录</h3>
       <el-form-item prop="username">
         <span class="user">用户:</span>
         <el-input ref="username" v-model="loginForm.username" class="user" type="text" name="username" />
@@ -26,7 +26,7 @@ export default {
   name: 'Login',
   data() {
     const validatorUsername = (rule, value, callback) => {
-      if (value == 0) {
+      if (!(value)) {
         callback(new Error('用户不能为空'))
       } else if (value.length < 2) {
         callback(new Error('用户长度不符合'))
@@ -43,7 +43,7 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
+        username: 'er',
         password: '111111'
 
       },
@@ -59,7 +59,6 @@ export default {
       // const pass = this.$refs.password.value
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          alert('登录成功')
           this.$router.push('/index')
         } else {
           console.log('error submit!!')
@@ -76,7 +75,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
-  $dark_gray:red;
+  $dark_gray: #fff71b;
 
   .ba{
     height: 100%;
@@ -91,13 +90,14 @@ export default {
     .login-form {
       position:relative;
       width: 300px;
-      top: 50px;
+      top: 150px;
      text-align: center;
       max-width: 100%;
       padding: 160px 35px 0;
       margin: 0 auto;
       overflow: hidden;
-      border:red solid 1px;
+      background: rgba(88, 43, 63, 0.48);
+      border: rgba(66, 76, 42, 0.48) solid 1px;
     }
 
     span {
@@ -110,23 +110,23 @@ export default {
     }
     span.user{
       position: fixed;
-      top: 90px;
+      top: 190px;
       left: 620px;
     }
     span.password{
       position: fixed;
-      top: 120px;
+      top: 210px;
       left: 620px;
     }
     span.item1{
       position: fixed;
-      top: 190px;
+      top: 290px;
       left: 560px;
       font-size:13px;
     }
     span.item2{
       position: fixed;
-      top: 190px;
+      top: 290px;
       font-size:12px;
       left: 620px;
     }
@@ -134,19 +134,19 @@ export default {
   }
   .user{
     position: fixed;
-    top: 93px;
+    top: 193px;
     left: 690px;
   }
   .password{
     position: fixed;
-    top: 120px;
+    top: 220px;
     left: 690px;
   }
   h3{
     position: fixed;
-    top: 40px;
-    left: 710px;
-    color: blueviolet;
+    top: 140px;
+    left: 740px;
+    color: #fff71b;
   }
 
   .bt{
@@ -154,8 +154,8 @@ export default {
     position: fixed;
     background-color: antiquewhite;
     color: blue;
-    top: 150px;
-    left: 720px;
+    top: 250px;
+    left: 730px;
   }
 
 </style>
