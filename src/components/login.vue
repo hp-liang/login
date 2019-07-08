@@ -43,8 +43,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'er',
-        password: '111111'
+        username: '',
+        password: ''
 
       },
       loginRules: {
@@ -54,18 +54,21 @@ export default {
     }
   },
   methods: {
-    submitForm(loginForm) {
+    submitForm(loginForm){
       // const name = this.$refs.username.value
       // const pass = this.$refs.password.value
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
+          this.$cookies.set('name',this.$refs.username.value);
+          this.$cookies.set('password',this.$refs.password.value);
           this.$router.push('/index')
         } else {
           console.log('error submit!!')
           return false
         }
       })
-    }
+    },
+
 
   }
 

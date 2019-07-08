@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Login from '@/components/login'
 import index from '@/components/index'
 import me from '@/components/me'
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 Vue.use(Router)
 
 export default new Router({
@@ -18,7 +19,7 @@ export default new Router({
       path: '/index',
       name: 'index',
       component: index
-    },{
+    }, {
       path: '/me',
       name: 'me',
       component: me
